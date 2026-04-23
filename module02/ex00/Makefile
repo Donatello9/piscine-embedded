@@ -14,5 +14,8 @@ hex:
 flash:
 	avrdude -c arduino -p $(MCU) -b 115200 -P $(PORT) -U flash:w:main.hex:i
 
+screen: all
+	screen /dev/ttyUSB0 115200
+
 clean:
 	rm -f main.bin main.hex

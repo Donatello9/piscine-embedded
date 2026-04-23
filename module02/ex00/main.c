@@ -6,7 +6,7 @@
 /*   By: siligh <siligh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 14:06:10 by siligh            #+#    #+#             */
-/*   Updated: 2026/04/23 14:38:04 by siligh           ###   ########.fr       */
+/*   Updated: 2026/04/23 15:16:04 by siligh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,20 @@ void uart_init(void)
     
 }
 
-int main()
+
+void uart_tx(void)
 {
-   while(1){} 
+    char c = 'Z';
+    while (!(UCSR0A & (1 << UDRE0))); //(20.11.1)
+    UDR0 = c;
+}
+
+int main(void)
+{
+    uart_init();
+    while(1)
+    {
+        uart_tx();
+        _delay_ms(1000);
+    } 
 }
